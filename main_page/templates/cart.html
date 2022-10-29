@@ -1,0 +1,207 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- ICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'img/icon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'img/icon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'img/icon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/icon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'img/icon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/icon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'img/icon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/icon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/icon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/icon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/icon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/icon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/icon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/icon/manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{% static 'img/icon/ms-icon-144x144.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" media="all">
+    <link rel='stylesheet' href="{% static 'css/lightslider.min.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" media="all">
+
+    <!-- Title -->
+    <title>E Shop | {{ title }} </title>
+
+
+</head>
+<body>
+<main class="container bg-white rounded-top shadow-lg">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <div class="container-fluid p-0">
+                <a class="navbar-brand text-uppercase fw-800" href="/">
+                    <img src="{% static 'img/logo.webp' %}" alt="e-shop logo" loading="lazy" width="150">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav"
+                        aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fas fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="myNav">
+                    <div class="navbar-nav ms-auto">
+                        {% for category in all_category %}
+                            <a class="nav-link" href="../category/{{ category.id }}">{{ category }}</a>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 pl-5" role="search">
+                    <input type="search" class="form-control" placeholder="Найти..." aria-label="Search">
+                </form>
+            </div>
+        </nav>
+    </header>
+    <hr>
+
+    <section class="new-products">
+        {% if user_cart %}
+            <div class="row g-5">
+                <div class="col-md-5 col-lg-4 order-md-last">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">В Корзине</span>
+                        <span class="badge bg-primary rounded-pill">{{ count_products_in }}</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        {% for cart in user_cart %}
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <div>
+                                    <h6 class="my-0">{{ cart.user_product }}</h6>
+                                    <small class="text-muted">Кол-во: {{ cart.user_product_quantity }}</small>
+                                    <p><small class="text-muted">Цена: {{ cart.user_product.product_price }}</small></p>
+                                </div>
+                                <span class="text-muted">{% widthratio cart.user_product_quantity 1 cart.user_product.product_price %}</span>
+                            </li>
+                        {% endfor %}
+
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Сумма заказа:</span>
+                            <strong>{{total}}</strong>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col-md-7 col-lg-8">
+                    <h4 class="mb-3">Оформление заказа</h4>
+                    <form class="needs-validation" novalidate action="/checkout/" method="post">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">Ваше имя</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder=""
+                                       value="" required>
+                                <div class="invalid-feedback">
+                                    Требуется действительное имя
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label">Фамилия</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder=""
+                                       value="" required>
+                                <div class="invalid-feedback">
+                                    Требуется действующая фамилия.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="email" class="form-label">E-mail <span
+                                        class="text-muted">(По желанию)</span></label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                       placeholder="you@example.com">
+                                <div class="invalid-feedback">
+                                    Пожалуйста, введите действующий адрес электронной почты
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="address" class="form-label">Адрес</label>
+                                <input type="text" class="form-control" id="address" name="address"
+                                       placeholder="1234 Main St" required>
+                                <div class="invalid-feedback">
+                                    Пожалуйста, введите адрес доставки.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="address2" class="form-label">Адрес 2 <span
+                                        class="text-muted">(По желанию)</span></label>
+                                <input type="text" class="form-control" id="address2" name="address2"
+                                       placeholder="Apartment or suite">
+                            </div>
+
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="same-address" name="same-address">
+                            <label class="form-check-label" for="same-address">Адрес доставки совпадает с моим платежным
+                                адресом</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="save-info" name="save-info">
+                            <label class="form-check-label" for="save-info">Сохраните эту информацию для следующего
+                                раза</label>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h4 class="mb-3">Оплата</h4>
+
+                        <div class="my-3">
+                            <div class="form-check">
+                                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked
+                                       required>
+                                <label class="form-check-label" for="credit">Кредитная карта</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                                <label class="form-check-label" for="debit">Наличними</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                                <label class="form-check-label" for="paypal">Онлайн оплата</label>
+                            </div>
+                        </div>
+
+                        <button class="w-100 btn btn-danger btn-lg" type="submit">Оформить заказ</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <h1 class="text-center">Корзина пуста</h1>
+        {% endif %}
+    </section>
+
+
+    <footer class="bg-light text-center text-white">
+
+        <!-- Copyright -->
+        <div class="text-center p-3">
+            <a class="text-black-50" href="/">© {% now "Y" %} E-shop</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+</main>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/lightslider.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- ICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'img/icon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'img/icon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'img/icon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/icon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'img/icon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/icon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'img/icon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/icon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/icon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/icon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/icon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/icon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/icon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/icon/manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{% static 'img/icon/ms-icon-144x144.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" media="all">
+    <link rel='stylesheet' href="{% static 'css/lightslider.min.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" media="all">
+
+    <!-- Title -->
+    <title>E Shop | {{ current_product.product_name }} </title>
+
+
+</head>
+<body>
+<main class="container bg-white rounded-top shadow-lg">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <div class="container-fluid p-0">
+                <a class="navbar-brand text-uppercase fw-800" href="/">
+                    <img src="{% static 'img/logo.webp' %}" alt="e-shop logo" loading="lazy" width="150">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNav"
+                        aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fas fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="myNav">
+                    <div class="navbar-nav ms-auto">
+                        {% for category in all_category %}
+                            <a class="nav-link" href="../category/{{ category.id }}">{{ category }}</a>
+
+                        {% endfor %}
+                        <a href="/user_cart"><i class="fad fa-shopping-cart"></i></a>
+                    </div>
+                </div>
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 pl-5" role="search">
+                    <input type="search" class="form-control" placeholder="Найти..." aria-label="Search">
+                </form>
+            </div>
+        </nav>
+    </header>
+    <hr>
+    <section class="new-products">
+        <div class="container-fluid mt-2 mb-3">
+            <div class="row no-gutters">
+                <!-- Product images slider -->
+                <div class="col-md-5 pr-2">
+                    <div class="card">
+                        <div class="demo">
+                            <ul id="lightSlider">
+                                <li data-thumb="https://i.imgur.com/KZpuufK.jpg">
+                                    <img src="https://i.imgur.com/KZpuufK.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/GwiUmQA.jpg">
+                                    <img src="https://i.imgur.com/GwiUmQA.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/DhKkTrG.jpg">
+                                    <img src="https://i.imgur.com/DhKkTrG.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/kYWqL7k.jpg">
+                                    <img src="https://i.imgur.com/kYWqL7k.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/c9uUysL.jpg">
+                                    <img src="https://i.imgur.com/c9uUysL.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/KZpuufK.jpg">
+                                    <img src="https://i.imgur.com/KZpuufK.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/GwiUmQA.jpg">
+                                    <img src="https://i.imgur.com/GwiUmQA.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/DhKkTrG.jpg">
+                                    <img src="https://i.imgur.com/DhKkTrG.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/kYWqL7k.jpg">
+                                    <img src="https://i.imgur.com/kYWqL7k.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/c9uUysL.jpg">
+                                    <img src="https://i.imgur.com/c9uUysL.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/KZpuufK.jpg">
+                                    <img src="https://i.imgur.com/KZpuufK.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/GwiUmQA.jpg">
+                                    <img src="https://i.imgur.com/GwiUmQA.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/DhKkTrG.jpg">
+                                    <img src="https://i.imgur.com/DhKkTrG.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/kYWqL7k.jpg">
+                                    <img src="https://i.imgur.com/kYWqL7k.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                                <li data-thumb="https://i.imgur.com/c9uUysL.jpg">
+                                    <img src="https://i.imgur.com/c9uUysL.jpg" alt="image 1" loading="lazy"/>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Product images slider End-->
+
+                <!-- Product information -->
+                <div class="col-md-7">
+                    <div class="card">
+                        <!-- about -->
+                        <div class="about">
+                            <h1 class="fw-bold text-center">{{ current_product.product_name }}</h1>
+                            <!-- ratings -->
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="p-ratings">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <span class="ml-5">&nbsp; 5.0</span>
+                            </div>
+                            <h4 class="fw-bold text-start"><b>{{ current_product.product_price }}</b> UZS</h4>
+                            <h6 class="fw-light text-start">на складе: {{ current_product.product_count }} шт </h6>
+                        </div>
+
+
+                        <!-- buttons -->
+                        <div class="buttons">
+                            <lable for="pr_count" class="fw-bold">Кол-во</lable>
+
+                            <form action="/add_to_cart/{{ current_product.id }}" method="post">
+                                {% csrf_token %}
+                                <input type="number" class="form-control mb-2" name="pr_count" min="1" value="1">
+                                <button class="btn btn-outline-warning btn-long cart">Добавить в корзину</button>
+                                <button class="btn btn-warning btn-long buy">Купить в один клик</button>
+                                <button class="btn btn-light wishlist"><i class="fa fa-heart"></i></button>
+                            </form>
+                        </div>
+
+                        <hr>
+                        <!-- product-description -->
+                        <div class="product-description">
+                            <div class="mt-2">
+                                <span class="fw-bold">Описание</span>
+                                <p>{{ current_product.product_desc }}</p>
+                            </div>
+
+                            <div class="mt-2">
+                                <span class="fw-bold">Категория:  </span>
+                            </div>
+                            <div class="d-flex flex-row align-items-center">
+
+                                <div class="d-flex flex-column ml-1 comment-profile">
+                                    <a href="../category/{{ current_product.caregory_name.id }}"><span
+                                            class="username">{{ current_product.caregory_name }}</span></a>
+                                </div>
+                            </div>
+
+                            <div class="mt-2">
+                                <span class="fw-bold">Поделиться</span>
+                                <script src="https://yastatic.net/share2/share.js"></script>
+                                <div class="ya-share2" data-curtain data-services="telegram,viber,whatsapp"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Product information  End-->
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light text-center text-white">
+
+        <!-- Copyright -->
+        <div class="text-center p-3">
+            <a class="text-black-50" href="/">© {% now "Y" %} E-shop</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+</main>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/lightslider.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
